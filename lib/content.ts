@@ -27,10 +27,11 @@ export const solutions = [
     summary:
       "Solar, inverter and battery systems sized to your load, installed and maintained by our own engineers.",
     points: ["Load assessment", "Solar and inverter installs", "Backup and maintenance"],
-    image: "/images/service-alternative-power.png",
-    alt: "Engineer checking solar panels on a rooftop array",
+    image: "/images/solutions/alternative-power/hero-engineers.jpg",
+    alt: "Two engineers installing and checking rooftop solar panels at sunset",
     // Horizontal crop point, keeps the person in frame when the card is narrow.
-    focus: "65% center",
+    focus: "85% center",
+    grade: true,
   },
   {
     id: "networking",
@@ -54,10 +55,10 @@ export const solutions = [
     summary:
       "Custom digital tools and workflow automation that cut downtime and help teams scale with confidence.",
     points: ["Custom internal tools", "Workflow automation", "Systems integration"],
-    image: "/images/service-software.jpg",
-    alt: "Two developers reviewing code together on a laptop",
-    focus: "100% center",
-    // Unlike the other two exports, this photo has no built-in grade, so one is added in CSS.
+    image: "/images/service-software-office.jpg",
+    alt: "IDN software team working together at laptops in front of a sprint board",
+    focus: "48% center",
+    // Unlike the networking export, this photo has no built-in grade, so one is added in CSS.
     grade: true,
   },
 ] as const;
