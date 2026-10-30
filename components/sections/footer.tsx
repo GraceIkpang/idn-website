@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { footerLinks, offices } from "@/lib/content";
 import { NewsletterForm } from "@/components/ui/newsletter-form";
@@ -63,10 +64,10 @@ export function Footer() {
                 <p className="text-sm text-white/50">{group}</p>
                 <ul className="mt-4 space-y-3">
                   {links.map((l) => (
-                    <li key={l}>
-                      <a href="#top" className="text-base text-white/85 transition-colors duration-150 hover:text-gold">
-                        {l}
-                      </a>
+                    <li key={l.label}>
+                      <Link href={l.href} className="text-base text-white/85 transition-colors duration-150 hover:text-gold">
+                        {l.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>

@@ -1,10 +1,10 @@
 // Site copy. Items marked PLACEHOLDER need real data from IDN.
 
 export const nav = [
-  { label: "Home", href: "#top" },
-  { label: "About", href: "#about" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Products", href: "#tapsun" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Solutions", href: "/#solutions" },
+  { label: "Products", href: "/#tapsun" },
 ] as const;
 
 export const solutions = [
@@ -137,16 +137,91 @@ export const faqs = [
   },
 ] as const;
 
+// PLACEHOLDER names: swap for real partner logos.
 export const partners = ["Logoipsum", "Northwind", "Kestrel", "Halcyon", "Meridian", "Arbor"] as const;
 
-// PLACEHOLDER contact details.
-export const offices = [
-  { city: "Abuja", address: "Office address", phone: "+234 000 000 0000", email: "abuja@idn.ng" },
-  { city: "Lagos", address: "Office address", phone: "+234 000 000 0000", email: "lagos@idn.ng" },
+// Sectors IDN serves, drawn from the client testimonials.
+export const sectors = ["Financial services", "Education", "Retail", "Enterprise", "Homes"] as const;
+
+type Office = {
+  city: string;
+  address: string;
+  phone: string;
+  email: string;
+  hours: string;
+  /** Path under /public. Null shows a placeholder panel until a photo is added. */
+  image: string | null;
+  /** Google Maps link for the office. */
+  directions: string;
+};
+
+// PLACEHOLDER contact details, hours, photos and map links.
+export const offices: readonly Office[] = [
+  {
+    city: "Abuja",
+    address: "Office address, Abuja, FCT",
+    phone: "+234 000 000 0000",
+    email: "abuja@idn.ng",
+    hours: "Monday to Friday, 8:00 to 17:00",
+    image: null,
+    directions: "https://maps.google.com/?q=Abuja",
+  },
+  {
+    city: "Lagos",
+    address: "Office address, Lagos",
+    phone: "+234 000 000 0000",
+    email: "lagos@idn.ng",
+    hours: "Monday to Friday, 8:00 to 17:00",
+    image: null,
+    directions: "https://maps.google.com/?q=Lagos",
+  },
+];
+
+// PLACEHOLDER social URLs.
+export const footerLinks = {
+  Company: [
+    { label: "Home", href: "/" },
+    { label: "About us", href: "/about" },
+    { label: "Contact", href: "#contact" },
+  ],
+  Solutions: [
+    { label: "Alternative power", href: "/#solutions" },
+    { label: "Networking", href: "/#solutions" },
+    { label: "Software", href: "/#solutions" },
+    { label: "TapSun", href: "/#tapsun" },
+  ],
+  Social: [
+    { label: "Instagram", href: "#" },
+    { label: "Facebook", href: "#" },
+    { label: "LinkedIn", href: "#" },
+    { label: "TikTok", href: "#" },
+  ],
+} as const;
+
+// About page
+
+export const facts = [
+  ["Two offices", "Abuja and Lagos, delivering nationwide"],
+  ["Three disciplines", "Power, networking and software"],
+  ["One team", "From first assessment to long-term support"],
 ] as const;
 
-export const footerLinks = {
-  Company: ["Home", "About us", "Contact"],
-  Solutions: ["Alternative power", "Networking", "Software", "TapSun"],
-  Social: ["Instagram", "Facebook", "LinkedIn", "TikTok"],
+export const principles = {
+  vision:
+    "To be a vibrant data network company that leads the way in providing cutting-edge digital solutions in Nigeria.",
+  mission: "To provide excellent customer service in all data and internet-related communications in Nigeria.",
+  values: ["Excellence", "Innovation", "Integrity", "Customer satisfaction", "Reliability"],
 } as const;
+
+export const leaders = [
+  { name: "Joe Okojie", role: "Managing Director", image: "/images/about/okojie.jpg" },
+  { name: "Ehichioya Osagie", role: "Chief Operations Officer", image: "/images/about/osagie.jpg" },
+  { name: "Patricia Ozioko", role: "HR Manager", image: "/images/about/patricia.jpg" },
+] as const;
+
+// The three IDN entities. The site stays under the IDN name; these appear only as visual storytelling.
+export const entities = [
+  { name: "Intercontinental", focus: "Global infrastructure and fibre", color: "var(--color-intercontinental)" },
+  { name: "Interdigital", focus: "Cloud computing and processing", color: "var(--color-interdigital)" },
+  { name: "Intercom", focus: "Secure routing and voice networks", color: "var(--color-intercom)" },
+] as const;

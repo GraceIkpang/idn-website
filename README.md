@@ -1,6 +1,6 @@
 # IDN website
 
-Landing page for IDN: alternative power, enterprise networking and custom software, Abuja and Lagos.
+Website for IDN: alternative power, enterprise networking and custom software, Abuja and Lagos.
 
 Built with Next.js 15 (App Router), TypeScript, Tailwind CSS v4 and Motion.
 
@@ -22,9 +22,10 @@ npm run lint    # lint
 
 | To change | Edit |
 |---|---|
-| Section order | `app/page.tsx` |
+| Section order | `app/page.tsx` (home), `app/about/page.tsx` (about) |
 | Most copy (nav, solutions, testimonials, FAQs, projects, offices, footer links) | `lib/content.ts` |
-| A section's layout | `components/sections/<section>.tsx` |
+| A section's layout | `components/sections/<section>.tsx` (home), `components/about/<section>.tsx` (about) |
+| Nav and sticky header | `components/ui/site-header.tsx` |
 | Shared pieces (reveal animations, menu, logo, accordion, newsletter form) | `components/ui/` |
 | Colours, radii, easing | `app/globals.css` (`@theme` tokens) |
 | Animation timing | `lib/motion.ts` |
@@ -32,7 +33,9 @@ npm run lint    # lint
 
 ## Before launch
 
-Items marked `PLACEHOLDER` in `lib/content.ts` and `components/sections/about.tsx` still need real data from IDN:
-partner logos, testimonials, office addresses and phone numbers, and project details.
+Items marked `PLACEHOLDER` in `lib/content.ts`, `components/sections/about.tsx` and `components/about/partners.tsx` still need real data from IDN:
+partner logos, testimonials, office addresses, phone numbers, hours, photos and map links, social links and project details.
+
+To add an office photo, put it in `public/images/about/` and set that office's `image` field in `lib/content.ts`.
 
 The hero photo (`public/images/hero-engineer.png`) is AI-generated. Swap in a real photo of the IDN team when one is available.

@@ -1,15 +1,11 @@
-import { partners } from "@/lib/content";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { facts, partners } from "@/lib/content";
 import { wrap } from "@/lib/layout";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { Statement } from "@/components/ui/statement";
 import { cn } from "@/lib/cn";
-
-const facts = [
-  ["Two offices", "Abuja and Lagos, delivering nationwide"],
-  ["Three disciplines", "Power, networking and software"],
-  ["One team", "From first assessment to long-term support"],
-] as const;
 
 export function About() {
   return (
@@ -26,7 +22,14 @@ export function About() {
               </div>
             ))}
           </Reveal>
-          <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-4">
+          <Link
+            href="/about"
+            className="group mt-8 inline-flex h-11 items-center gap-2 text-base font-medium text-text-primary"
+          >
+            Read our story and meet the team
+            <ArrowUpRight aria-hidden className="size-4 transition-transform duration-300 ease-out-soft group-hover:rotate-45" strokeWidth={2} />
+          </Link>
+          <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4">
             <p className="text-sm text-text-muted">Trusted by</p>
             {/* PLACEHOLDER: partner SVG logos */}
             {partners.map((p) => (

@@ -8,6 +8,11 @@
   --color-ink: #000000;
   --color-bone: #f4f1ea; /* warm off-white section background */
 
+  /* Entity colours, from the brand brief. Deepened to pass 4.5:1 on white. */
+  --color-intercontinental: #8a6a12;
+  --color-interdigital: #3550e0;
+  --color-intercom: #d0262c;
+
   /* Neutrals */
   --color-surface: #ffffff;
   --color-layer-1: #f6f6f4;

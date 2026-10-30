@@ -2,11 +2,12 @@
 
 import { motion } from "motion/react";
 import { ease } from "@/lib/motion";
+import { cn } from "@/lib/cn";
 
-/** Gold hairline that draws from the left when it scrolls in. */
-export function DrawLine({ delay = 0 }: { delay?: number }) {
+/** Gold hairline that draws from the left when it scrolls in. `className` styles the track. */
+export function DrawLine({ delay = 0, className }: { delay?: number; className?: string }) {
   return (
-    <div aria-hidden className="h-px bg-white/15">
+    <div aria-hidden className={cn("h-px", className ?? "bg-white/15")}>
       <motion.div
         className="h-px origin-left bg-gold"
         initial={{ scaleX: 0 }}
