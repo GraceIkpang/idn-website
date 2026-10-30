@@ -527,10 +527,11 @@ export const solutionPages: readonly SolutionPage[] = [
     title: "Software",
     tagline: "Custom web and mobile software, automation and technology advice, built around how your business really works.",
     hero: {
-      image: `${soft}/hero.jpg`,
-      alt: "Developer's monitor showing code and a project file tree",
-      focus: "55% center",
-      focusLg: "60% center",
+      image: "/images/service-software-office.jpg",
+      alt: "IDN software team working together at laptops in front of a sprint board",
+      // Small screens show the developers in the middle; wide screens lift the crop to keep faces in view.
+      focus: "48% center",
+      focusLg: "50% 8%",
     },
     overview: {
       lead: "From idea to deployment, IDN builds",
