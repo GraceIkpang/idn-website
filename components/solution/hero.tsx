@@ -35,9 +35,14 @@ export function SolutionHero({ page }: { page: SolutionPage }) {
               style={{ objectPosition: page.hero.focus }}
             />
           </motion.div>
+          {/* Two layers: top-to-bottom for the nav and buttons, left-to-right behind the headline. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(0_0_0/0.5),rgb(0_0_0/0.15)_28%,rgb(0_0_0/0.3)_55%,rgb(0_0_0/0.75))]"
+            className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(0_0_0/0.55),rgb(0_0_0/0.2)_28%,rgb(0_0_0/0.4)_55%,rgb(0_0_0/0.85))]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(0_0_0/0.55),rgb(0_0_0/0.25)_45%,transparent_75%)]"
           />
 
           <TopNav dark current="Solutions" />
