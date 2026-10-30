@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-gold: #b38e26;
+  --color-gold-ink: #7a5e0e; /* gold text on light surfaces, 6:1 on white */
+  --color-gold-tint: #f7f1e1;
+  --color-ink: #000000;
+  --color-bone: #f4f1ea; /* warm off-white section background */
+
+  /* Neutrals */
+  --color-surface: #ffffff;
+  --color-layer-1: #f6f6f4;
+  --color-layer-2: #ececea;
+  --color-text-primary: #0d0d0d;
+  --color-text-secondary: #555555;
+  --color-text-muted: #6e6e6e;
+  --color-line: rgb(0 0 0 / 0.08);
+  --color-line-inverse: rgb(255 255 255 / 0.12);
+
+  --font-outfit: var(--font-outfit-family), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-marquee: marquee 60s linear infinite;
+  --animate-marquee-reverse: marquee 60s linear infinite reverse;
+
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  [id] { scroll-margin-top: 6rem; }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  img { outline: 1px solid rgb(0 0 0 / 0.06); outline-offset: -1px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-marquee-reverse { animation: none; }
+}
+
+/* Logo mark is a raster with alpha, used as a mask so it takes any color. */
+.idn-mark {
+  display: inline-block;
+  aspect-ratio: 564 / 368;
+  background-color: currentColor;
+  mask: url("/brand/idn-mark.png") center / contain no-repeat;
+  -webkit-mask: url("/brand/idn-mark.png") center / contain no-repeat;
+}
+
+.press { transition: scale 200ms var(--ease-out-soft); }
+.press:active { scale: 0.97; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
