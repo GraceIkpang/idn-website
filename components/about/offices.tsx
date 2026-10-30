@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight, Clock, ImageIcon, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
-import { directionsUrl, mapEmbedUrl, offices } from "@/lib/content";
+import { directionsUrl, mapEmbedUrl, offices, telHref } from "@/lib/content";
 import { sectionHeading, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
@@ -85,7 +85,7 @@ export function Offices({
                   <Detail icon={MapPin}>{o.address}</Detail>
                   <Detail icon={Clock}>{o.hours}</Detail>
                   <Detail icon={Phone}>
-                    <a href={`tel:${o.phone.replace(/\s/g, "")}`} className="tabular-nums transition-colors duration-150 hover:text-ink">
+                    <a href={telHref(o.phone)} className="tabular-nums transition-colors duration-150 hover:text-ink">
                       {o.phone}
                     </a>
                   </Detail>

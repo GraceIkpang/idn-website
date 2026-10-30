@@ -15,7 +15,7 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
-import { contactEmail, contactTopics, offices, type ContactTopic } from "@/lib/content";
+import { contactEmail, type ContactTopic, contactTopics, offices, telHref } from "@/lib/content";
 import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
@@ -261,13 +261,9 @@ export function MessageForm() {
                       <ArrowRight aria-hidden className="size-4 transition-transform duration-300 ease-out-soft group-hover:translate-x-0.5" strokeWidth={2} />
                     </button>
                     <p className="mt-4 text-center text-sm text-text-muted">
-                      Prefer to talk? Call Abuja on{" "}
-                      <a href={`tel:${offices[0].phone.replace(/\s/g, "")}`} className="text-text-secondary tabular-nums underline-offset-4 hover:underline">
+                      Prefer to talk? Call us on{" "}
+                      <a href={telHref(offices[0].phone)} className="text-text-secondary tabular-nums underline-offset-4 hover:underline">
                         {offices[0].phone}
-                      </a>{" "}
-                      or Lagos on{" "}
-                      <a href={`tel:${offices[1].phone.replace(/\s/g, "")}`} className="text-text-secondary tabular-nums underline-offset-4 hover:underline">
-                        {offices[1].phone}
                       </a>
                       .
                     </p>

@@ -169,26 +169,32 @@ export type Office = {
   image: string | null;
 };
 
+/** tel: link for a Nigerian number written locally (0705-555-2445) or internationally (+234 ...). */
+export const telHref = (phone: string) => {
+  const digits = phone.replace(/[^\d+]/g, "");
+  return `tel:${digits.startsWith("0") ? `+234${digits.slice(1)}` : digits}`;
+};
+
 /** Google Maps embed and directions links, built from the address so they always match it. */
 export const mapEmbedUrl = (o: Office) => `https://maps.google.com/maps?q=${encodeURIComponent(o.address)}&z=15&output=embed`;
 export const directionsUrl = (o: Office) =>
   `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(o.address)}`;
 
-// PLACEHOLDER addresses, phone numbers, hours and photos (addresses and numbers are from the design mock-up).
+// PLACEHOLDER opening hours and photos. Addresses, phone and email are confirmed by IDN.
 export const offices: readonly Office[] = [
   {
     city: "Abuja",
-    address: "Plot 1234, Wuse Zone 5, Abuja, FCT, Nigeria",
-    phone: "+234 803 000 0001",
-    email: "abuja@idn.ng",
+    address: "19, Olu Awotesu Street, Lifecamp, Jabi 900108, Abuja",
+    phone: "0705-555-2445",
+    email: "info@idnng.com",
     hours: "Monday to Friday, 8:00 to 17:00",
     image: null,
   },
   {
     city: "Lagos",
-    address: "3A Kofo Abayomi Street, Victoria Island, Lagos, Nigeria",
-    phone: "+234 803 000 0002",
-    email: "lagos@idn.ng",
+    address: "Plot 11934, Kasumu Ekemede Street, Victoria Island, Lagos",
+    phone: "0705-555-2445",
+    email: "info@idnng.com",
     hours: "Monday to Friday, 8:00 to 17:00",
     image: null,
   },
@@ -245,8 +251,8 @@ export const entities = [
 
 // Contact page
 
-/** Where general enquiries go. PLACEHOLDER: confirm the inbox with IDN. */
-export const contactEmail = "hello@idn.ng";
+/** Where general enquiries go. */
+export const contactEmail = "info@idnng.com";
 
 export const contactTopics = [
   { id: "power", label: "Alternative power" },

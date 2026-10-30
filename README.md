@@ -34,7 +34,7 @@ npm run lint    # lint
 ## Before launch
 
 Items marked `PLACEHOLDER` in `lib/content.ts`, `components/sections/about.tsx` and `components/about/partners.tsx` still need real data from IDN:
-partner logos, testimonials, office addresses, phone numbers, hours, photos and map links, social links and project details.
+partner logos, testimonials, office hours and photos, social links, the TapSun URL and project details.
 
 To add an office photo, put it in `public/images/about/` and set that office's `image` field in `lib/content.ts`.
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { contactHref, externalProps, footerLinks, offices, type ContactTopic } from "@/lib/content";
+import { contactHref, type ContactTopic, externalProps, footerLinks, offices, telHref } from "@/lib/content";
 import { NewsletterForm } from "@/components/ui/newsletter-form";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
@@ -57,7 +57,7 @@ export function Footer({ cta = true, topic }: { cta?: boolean; topic?: ContactTo
                 <address key={o.city} className="not-italic">
                   <p className="text-base font-medium">{o.city} office</p>
                   <p className="mt-3 text-sm text-white/60">{o.address}</p>
-                  <a href={`tel:${o.phone.replace(/\s/g, "")}`} className="mt-1 block text-sm text-white/60 tabular-nums hover:text-white">
+                  <a href={telHref(o.phone)} className="mt-1 block text-sm text-white/60 tabular-nums hover:text-white">
                     {o.phone}
                   </a>
                   <a href={`mailto:${o.email}`} className="mt-1 block break-all text-sm text-white/60 hover:text-white">
