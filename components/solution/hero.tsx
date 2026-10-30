@@ -7,6 +7,7 @@ import type { SolutionPage } from "@/lib/solution-pages";
 import { duration, ease, stagger } from "@/lib/motion";
 import { StickyHeader, TopNav } from "@/components/ui/site-header";
 import { Pill } from "@/components/ui/pill";
+import { cn } from "@/lib/cn";
 
 const line = {
   hidden: { opacity: 0, y: 24 },
@@ -18,7 +19,13 @@ export function SolutionHero({ page }: { page: SolutionPage }) {
     <>
       <StickyHeader current="Solutions" threshold={480} />
       <header id="top" className="p-2 sm:p-3">
-        <div className="relative isolate flex min-h-[560px] flex-col overflow-hidden rounded-[24px] bg-ink text-white sm:rounded-[32px] lg:h-[min(76svh,640px)] lg:min-h-[560px]">
+        <div
+          className={cn(
+            "relative isolate flex min-h-[560px] flex-col overflow-hidden rounded-[24px] bg-ink text-white sm:rounded-[32px]",
+            // Very wide banner photos zoom in less, and keep people in frame, in a shorter hero.
+            page.hero.compact ? "lg:h-[520px] lg:min-h-0" : "lg:h-[min(76svh,640px)] lg:min-h-[560px]",
+          )}
+        >
           <motion.div
             className="absolute inset-0 -z-10"
             initial={{ scale: 1.06 }}
@@ -31,8 +38,13 @@ export function SolutionHero({ page }: { page: SolutionPage }) {
               fill
               priority
               sizes="100vw"
-              className="object-cover"
-              style={{ objectPosition: page.hero.focus }}
+              className="object-cover object-[var(--focus)] lg:object-[var(--focus-lg)]"
+              style={
+                {
+                  "--focus": page.hero.focus,
+                  "--focus-lg": page.hero.focusLg ?? page.hero.focus,
+                } as React.CSSProperties
+              }
             />
           </motion.div>
           {/* Two layers: top-to-bottom for the nav and buttons, left-to-right behind the headline. */}
@@ -48,7 +60,7 @@ export function SolutionHero({ page }: { page: SolutionPage }) {
           <TopNav dark current="Solutions" />
 
           <motion.div
-            className="mt-auto px-5 pt-24 pb-6 sm:px-8 sm:pb-8 lg:px-12 lg:pb-14"
+            className={cn("mt-auto px-5 pt-24 pb-6 sm:px-8 sm:pb-8 lg:px-12 lg:pb-14", page.hero.compact && "lg:pt-6 lg:pb-12")}
             initial="hidden"
             animate="show"
             variants={{ hidden: {}, show: { transition: { staggerChildren: stagger, delayChildren: 0.15 } } }}

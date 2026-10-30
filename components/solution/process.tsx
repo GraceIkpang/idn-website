@@ -6,7 +6,13 @@ import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 
 /** What happens after someone gets in touch, as four timed steps. */
-export function SolutionProcess({ steps }: { steps: readonly ProcessStep[] }) {
+export function SolutionProcess({
+  heading,
+  steps,
+}: {
+  heading: readonly [string, string];
+  steps: readonly ProcessStep[];
+}) {
   return (
     <section aria-labelledby="process-title" className="pb-24 sm:pb-32">
       <div className={wrap}>
@@ -14,7 +20,7 @@ export function SolutionProcess({ steps }: { steps: readonly ProcessStep[] }) {
           <div className="lg:col-span-7">
             <Pill>How it works</Pill>
             <h2 id="process-title" className={cn("mt-6 max-w-[16ch] text-balance", sectionHeading)}>
-              From first call <span className="text-gold-ink">to steady power.</span>
+              {heading[0]} <span className="text-gold-ink">{heading[1]}</span>
             </h2>
           </div>
           <p className="max-w-[44ch] text-base leading-relaxed text-text-secondary text-pretty sm:text-lg lg:col-span-5">

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion, type MotionValue } from "motion/react";
 import { BrickWall, Lightbulb, ThumbsUp } from "lucide-react";
-import type { SolutionPage, StoryStep } from "@/lib/solution-pages";
+import type { StoryStep } from "@/lib/solution-pages";
 import { wrap } from "@/lib/layout";
 import { duration, ease } from "@/lib/motion";
 import { useAutoCycle } from "@/lib/use-auto-cycle";
@@ -28,9 +28,8 @@ function Progress({ value, active, className }: { value: MotionValue<number>; ac
  * takes over. Desktop widens the open card into a photo; mobile keeps one fixed-height photo panel with tabs
  * below, so the page never jumps as steps change. With reduced motion the steps only change when chosen.
  */
-export function SolutionStory({ page }: { page: SolutionPage }) {
+export function SolutionStory({ steps }: { steps: readonly StoryStep[] }) {
   const reduce = useReducedMotion();
-  const steps = page.story;
   const { ref, active, select, progress, pauseProps } = useAutoCycle<HTMLDivElement>(steps.length, DWELL, {
     enabled: !reduce,
   });

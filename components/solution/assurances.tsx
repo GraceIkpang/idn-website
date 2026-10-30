@@ -5,21 +5,22 @@ import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 
-/** Warranty terms as big year counts on a dark band, then the equipment brands. */
+/** Guarantees as big figures on a dark band (warranty years, uptime, response times), then equipment brands. */
 export function SolutionAssurances({ assurances }: { assurances: NonNullable<SolutionPage["assurances"]> }) {
+  const { pill, heading, intro } = assurances;
   return (
     <section aria-labelledby="assurances-title" className="px-2 pb-24 sm:px-3 sm:pb-32">
       <div className="rounded-[24px] bg-ink py-20 text-white sm:rounded-[32px] sm:py-28">
         <div className={wrap}>
           <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
             <div className="lg:col-span-7">
-              <Pill tone="dark">Warranties</Pill>
+              <Pill tone="dark">{pill}</Pill>
               <h2 id="assurances-title" className={cn("mt-6 max-w-[16ch] text-balance", sectionHeading)}>
-                Built to last. <span className="text-gold">Backed in writing.</span>
+                {heading[0]} <span className="text-gold">{heading[1]}</span>
               </h2>
             </div>
             <p className="max-w-[44ch] text-base leading-relaxed text-white/70 text-pretty sm:text-lg lg:col-span-5">
-              We install quality equipment from established manufacturers and stand behind our own work.
+              {intro}
             </p>
           </Reveal>
 
@@ -29,8 +30,8 @@ export function SolutionAssurances({ assurances }: { assurances: NonNullable<Sol
                 <DrawLine delay={i * 0.1} />
                 <Reveal delay={0.1 + i * 0.08}>
                   <p className="mt-6 flex items-baseline gap-2">
-                    <span className="text-6xl font-medium tracking-[-0.04em] text-gold tabular-nums">{a.years}</span>
-                    <span className="text-base text-white/60">years</span>
+                    <span className="text-6xl font-medium tracking-[-0.04em] whitespace-nowrap text-gold tabular-nums">{a.value}</span>
+                    {a.unit && <span className="text-base text-white/60">{a.unit}</span>}
                   </p>
                   <h3 className="mt-4 text-xl font-medium">{a.title}</h3>
                   <p className="mt-2 text-base leading-relaxed text-white/60 text-pretty">{a.body}</p>
