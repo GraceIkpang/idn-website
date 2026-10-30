@@ -6,6 +6,7 @@ import type { Estimator, Package } from "@/lib/solution-pages";
 import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
+import { contactHref, type ContactTopic } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
 const naira = new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 });
@@ -27,7 +28,15 @@ function estimate(spend: number, e: Estimator) {
   return { solarKw, batteryKwh, low, high, tier };
 }
 
-export function SolutionEstimator({ estimator, packages }: { estimator: Estimator; packages?: readonly Package[] }) {
+export function SolutionEstimator({
+  estimator,
+  packages,
+  topic,
+}: {
+  estimator: Estimator;
+  packages?: readonly Package[];
+  topic: ContactTopic;
+}) {
   const [spend, setSpend] = useState(estimator.spend.initial);
   const inputId = useId();
   const r = estimate(spend, estimator);
@@ -107,7 +116,7 @@ export function SolutionEstimator({ estimator, packages }: { estimator: Estimato
                 </a>
               )}
               <a
-                href="#contact"
+                href={contactHref(topic)}
                 className="press group inline-flex h-12 w-fit items-center gap-3 rounded-full bg-gold pr-2 pl-5 text-base font-medium text-ink"
               >
                 Get an exact quote

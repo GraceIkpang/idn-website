@@ -47,14 +47,14 @@ export default async function SolutionRoute({ params }: Props) {
         {page.story && <SolutionStory steps={page.story} />}
         <SolutionOfferings page={page} />
         {page.capabilities && <SolutionCapabilities capabilities={page.capabilities} />}
-        {page.healthCheck && <SolutionHealthCheck check={page.healthCheck} />}
-        {page.scoper && <SolutionScoper scoper={page.scoper} />}
-        {page.packages && <SolutionPackages packages={page.packages} shop={page.id === "power"} />}
-        {page.estimator && <SolutionEstimator estimator={page.estimator} packages={page.packages?.items} />}
+        {page.healthCheck && <SolutionHealthCheck check={page.healthCheck} topic={page.id} />}
+        {page.scoper && <SolutionScoper scoper={page.scoper} topic={page.id} />}
+        {page.packages && <SolutionPackages packages={page.packages} topic={page.id} shop={page.id === "power"} />}
+        {page.estimator && <SolutionEstimator estimator={page.estimator} packages={page.packages?.items} topic={page.id} />}
         {page.process && (
           <SolutionProcess heading={page.process.heading} steps={page.process.steps} layout={page.process.layout} />
         )}
-        {page.teaser && <SolutionTeaser teaser={page.teaser} />}
+        {page.teaser && <SolutionTeaser teaser={page.teaser} topic={page.id} />}
         {page.project && <SolutionProject project={page.project} />}
         {page.assurances && <SolutionAssurances assurances={page.assurances} />}
         {page.faqs && <SolutionFaq title={page.title} items={page.faqs} />}

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight, Clock, ImageIcon, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
-import { offices } from "@/lib/content";
+import { directionsUrl, mapEmbedUrl, offices } from "@/lib/content";
 import { sectionHeading, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
@@ -17,21 +17,34 @@ function Detail({ icon: Icon, children }: { icon: LucideIcon; children: React.Re
   );
 }
 
-/** Abuja and Lagos as two shell cards: photo well on top, contact details below. */
-export function Offices() {
+type OfficesProps = {
+  /** "photo" shows the office photo (or a placeholder); "map" embeds a live Google Map of the address. */
+  media?: "photo" | "map";
+  /** Heading is [plain part, gold part]. */
+  heading?: readonly [string, string];
+  intro?: string;
+  className?: string;
+};
+
+/** Abuja and Lagos as two shell cards: photo or map well on top, contact details below. */
+export function Offices({
+  media = "photo",
+  heading = ["Two offices.", "Nationwide reach."],
+  intro = "Our teams in Abuja and Lagos plan, install and support projects across Nigeria. Visit us, call or send an email and the nearest office will pick it up.",
+  className = "pb-24 sm:pb-32",
+}: OfficesProps) {
   return (
-    <section aria-labelledby="offices-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="offices-title" className={className}>
       <div className={wrap}>
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">
             <Pill>Our offices</Pill>
             <h2 id="offices-title" className={cn("mt-6", sectionHeading)}>
-              Two offices. <span className="text-gold-ink">Nationwide reach.</span>
+              {heading[0]} <span className="text-gold-ink">{heading[1]}</span>
             </h2>
           </div>
           <p className="max-w-[44ch] text-base leading-relaxed text-text-secondary text-pretty sm:text-lg lg:col-span-5">
-            Our teams in Abuja and Lagos plan, install and support projects across Nigeria. Visit us, call or send an
-            email and the nearest office will pick it up.
+            {intro}
           </p>
         </Reveal>
 
@@ -39,7 +52,15 @@ export function Offices() {
           {offices.map((o) => (
             <RevealItem key={o.city} className="flex flex-col rounded-[28px] bg-layer-1 p-2">
               <div className="relative aspect-[16/10] overflow-hidden rounded-[20px] bg-layer-2 outline-1 -outline-offset-1 outline-black/8">
-                {o.image ? (
+                {media === "map" ? (
+                  <iframe
+                    src={mapEmbedUrl(o)}
+                    title={`Map of IDN's ${o.city} office`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 size-full border-0 grayscale-[35%]"
+                  />
+                ) : o.image ? (
                   <Image
                     src={o.image}
                     alt={`IDN's ${o.city} office`}
@@ -75,7 +96,7 @@ export function Offices() {
                   </Detail>
                 </address>
                 <a
-                  href={o.directions}
+                  href={directionsUrl(o)}
                   target="_blank"
                   rel="noreferrer"
                   className="press group mt-8 inline-flex h-12 w-fit items-center gap-3 rounded-full bg-ink pr-2 pl-5 text-base font-medium text-white"

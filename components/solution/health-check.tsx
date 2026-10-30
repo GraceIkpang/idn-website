@@ -8,6 +8,7 @@ import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { duration, ease } from "@/lib/motion";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
+import { contactHref, type ContactTopic } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
 /** Services that fix the ticked symptoms, most-needed first. */
@@ -18,7 +19,13 @@ function recommend(symptoms: NonNullable<SolutionPage["healthCheck"]>["symptoms"
 }
 
 /** Tick the problems you recognise; see which services we would start with. */
-export function SolutionHealthCheck({ check }: { check: NonNullable<SolutionPage["healthCheck"]> }) {
+export function SolutionHealthCheck({
+  check,
+  topic,
+}: {
+  check: NonNullable<SolutionPage["healthCheck"]>;
+  topic: ContactTopic;
+}) {
   const { pill, heading, intro, symptoms } = check;
   const [ticked, setTicked] = useState<ReadonlySet<number>>(new Set());
   const services = recommend(symptoms, ticked);
@@ -128,7 +135,7 @@ export function SolutionHealthCheck({ check }: { check: NonNullable<SolutionPage
                 {ticked.size} of {symptoms.length} ticked
               </p>
               <a
-                href="#contact"
+                href={contactHref(topic)}
                 className="press group inline-flex h-12 w-fit items-center gap-3 rounded-full bg-gold pr-2 pl-5 text-base font-medium text-ink"
               >
                 Book a network audit

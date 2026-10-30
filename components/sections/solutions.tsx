@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Plus } from "lucide-react";
 import { solutionIcons as icons } from "@/components/ui/solution-icons";
-import { solutions } from "@/lib/content";
+import { contactHref, solutions } from "@/lib/content";
 import { motion } from "motion/react";
 import { sectionHeading, wrap } from "@/lib/layout";
 import { Reveal } from "@/components/ui/reveal";
@@ -123,7 +123,7 @@ export function Solutions() {
                       ))}
                     </ul>
                     <a
-                      href="#contact"
+                      href={contactHref(s.id)}
                       className="press group/cta mt-6 inline-flex h-11 items-center gap-3 rounded-full bg-ink pr-1.5 pl-5 text-sm font-medium whitespace-nowrap text-white"
                     >
                       <span className="sm:hidden">Plan your project</span>

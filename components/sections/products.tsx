@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { pillars } from "@/lib/content";
+import { contactHref, pillars } from "@/lib/content";
 import { sectionHeading, wrap } from "@/lib/layout";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { DrawLine } from "@/components/ui/draw-line";
@@ -8,6 +8,7 @@ import { DrawLine } from "@/components/ui/draw-line";
 const tiles = [
   {
     id: "tapsun",
+    topic: "tapsun",
     tag: "Marketplace",
     title: "TapSun",
     body: "Inverters, batteries, solar panels and complete energy kits, ready to ship.",
@@ -17,6 +18,7 @@ const tiles = [
   },
   {
     id: "consultation",
+    topic: "power",
     tag: "Free consultation",
     title: "Unsure what your site needs?",
     body: "Share how you use power and an IDN engineer will recommend a backup system that fits your load and budget, at no cost.",
@@ -34,7 +36,7 @@ export function Products() {
         <RevealGroup className="grid gap-4 lg:grid-cols-2">
           {tiles.map((t) => (
             <RevealItem key={t.id}>
-              <a href="#contact" className="group relative isolate flex min-h-[460px] flex-col justify-end overflow-hidden rounded-[24px] p-6 sm:min-h-[560px] sm:p-8">
+              <a href={contactHref(t.topic)} className="group relative isolate flex min-h-[460px] flex-col justify-end overflow-hidden rounded-[24px] p-6 sm:min-h-[560px] sm:p-8">
                 <Image
                   src={t.image}
                   alt={t.alt}

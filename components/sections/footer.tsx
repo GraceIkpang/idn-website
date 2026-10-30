@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { footerLinks, offices } from "@/lib/content";
+import { contactHref, footerLinks, offices } from "@/lib/content";
 import { NewsletterForm } from "@/components/ui/newsletter-form";
 import { Reveal } from "@/components/ui/reveal";
+import { cn } from "@/lib/cn";
 
-export function Footer() {
+/** Site footer. `cta` adds the "Ready to power your next move?" block; the contact page leaves it out. */
+export function Footer({ cta = true }: { cta?: boolean }) {
   return (
     <footer id="contact" className="p-2 sm:p-3">
       <div className="relative isolate overflow-hidden rounded-[24px] bg-ink text-white sm:rounded-[32px]">
@@ -18,28 +20,30 @@ export function Footer() {
         />
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(0_0_0/0.2),rgb(0_0_0/0.92)_45%)]" />
 
-        <Reveal className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28">
-          <h2 className="max-w-[16ch] text-4xl leading-[1.02] font-medium tracking-[-0.035em] text-balance sm:text-5xl lg:text-6xl">
-            Ready to power your <span className="text-gold">next move?</span>
-          </h2>
-          <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <p className="max-w-[44ch] text-base text-white/70 text-pretty sm:text-lg">
-              Talk to an engineer about your site. We will recommend the right system and send a clear quote.
-            </p>
-            <a
-              href="mailto:hello@idn.ng"
-              className="press group inline-flex h-14 shrink-0 items-center justify-between gap-4 rounded-full bg-gold pr-2 pl-7 text-base font-medium text-ink sm:justify-start"
-            >
-              Talk to an engineer
-              <span className="grid size-10 place-items-center rounded-full bg-ink text-white transition-transform duration-300 ease-out-soft group-hover:translate-x-0.5">
-                <ArrowRight aria-hidden className="size-4" strokeWidth={2} />
-              </span>
-            </a>
-          </div>
-          <div className="mt-16 border-t border-line-inverse sm:mt-20" />
-        </Reveal>
+        {cta && (
+          <Reveal className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28">
+            <h2 className="max-w-[16ch] text-4xl leading-[1.02] font-medium tracking-[-0.035em] text-balance sm:text-5xl lg:text-6xl">
+              Ready to power your <span className="text-gold">next move?</span>
+            </h2>
+            <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <p className="max-w-[44ch] text-base text-white/70 text-pretty sm:text-lg">
+                Talk to an engineer about your site. We will recommend the right system and send a clear quote.
+              </p>
+              <a
+                href={contactHref()}
+                className="press group inline-flex h-14 shrink-0 items-center justify-between gap-4 rounded-full bg-gold pr-2 pl-7 text-base font-medium text-ink sm:justify-start"
+              >
+                Talk to an engineer
+                <span className="grid size-10 place-items-center rounded-full bg-ink text-white transition-transform duration-300 ease-out-soft group-hover:translate-x-0.5">
+                  <ArrowRight aria-hidden className="size-4" strokeWidth={2} />
+                </span>
+              </a>
+            </div>
+            <div className="mt-16 border-t border-line-inverse sm:mt-20" />
+          </Reveal>
+        )}
 
-        <div className="mx-auto mt-10 grid max-w-6xl gap-12 px-5 pb-10 sm:px-8 lg:grid-cols-12">
+        <div className={cn("mx-auto grid max-w-6xl gap-12 px-5 pb-10 sm:px-8 lg:grid-cols-12", cta ? "mt-10" : "pt-16 sm:pt-20")}>
           <div className="lg:col-span-5">
             <NewsletterForm className="max-w-sm" />
             <div className="mt-8 grid grid-cols-2 gap-6">

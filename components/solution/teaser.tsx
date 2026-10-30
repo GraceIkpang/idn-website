@@ -6,6 +6,7 @@ import { ArrowRight, ArrowUp, Database, Sparkles } from "lucide-react";
 import type { SolutionPage } from "@/lib/solution-pages";
 import { sectionSpace, wrap } from "@/lib/layout";
 import { Reveal } from "@/components/ui/reveal";
+import { contactHref, type ContactTopic } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
 type Phase = "typing" | "thinking" | "answering" | "done";
@@ -39,7 +40,7 @@ function AiMark({ className }: { className?: string }) {
  * the answer shows in full and nothing advances on its own. The preview is decorative; the examples are
  * repeated as plain text for screen readers.
  */
-export function SolutionTeaser({ teaser }: { teaser: NonNullable<SolutionPage["teaser"]> }) {
+export function SolutionTeaser({ teaser, topic }: { teaser: NonNullable<SolutionPage["teaser"]>; topic: ContactTopic }) {
   const { examples } = teaser;
   const reduce = useReducedMotion();
   const panel = useRef<HTMLDivElement>(null);
@@ -139,7 +140,7 @@ export function SolutionTeaser({ teaser }: { teaser: NonNullable<SolutionPage["t
                 ))}
               </ul>
               <a
-                href="#contact"
+                href={contactHref(topic)}
                 className="press group mt-8 inline-flex h-12 items-center gap-3 rounded-full bg-white pr-2 pl-5 text-base font-medium text-navy"
               >
                 {teaser.cta}

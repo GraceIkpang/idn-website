@@ -6,10 +6,11 @@ import type { SolutionPage } from "@/lib/solution-pages";
 import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
+import { contactHref, type ContactTopic } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
 /** Pick a platform and features; see a rough timeline and the engagement that fits. */
-export function SolutionScoper({ scoper }: { scoper: NonNullable<SolutionPage["scoper"]> }) {
+export function SolutionScoper({ scoper, topic }: { scoper: NonNullable<SolutionPage["scoper"]>; topic: ContactTopic }) {
   const { pill, heading, intro, platforms, features, teamThreshold } = scoper;
   const [platform, setPlatform] = useState(0);
   const [picked, setPicked] = useState<ReadonlySet<number>>(new Set([0]));
@@ -128,7 +129,7 @@ export function SolutionScoper({ scoper }: { scoper: NonNullable<SolutionPage["s
 
             <div className="mt-auto pt-10">
               <a
-                href="#contact"
+                href={contactHref(topic)}
                 className="press group inline-flex h-12 w-fit items-center gap-3 rounded-full bg-gold pr-2 pl-5 text-base font-medium text-ink"
               >
                 Book a discovery call

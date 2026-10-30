@@ -118,7 +118,7 @@ export function MobileMenu({ light = false, cta = "Contact us" }: { light?: bool
             </motion.nav>
 
             <a
-              href="#contact"
+              href="/contact"
               onClick={() => setOpen(false)}
               className="press mt-auto flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-gold text-base font-medium text-ink"
             >

@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import type { SolutionPage } from "@/lib/solution-pages";
-import { tapsunUrl } from "@/lib/content";
+import { contactHref, type ContactTopic, tapsunUrl } from "@/lib/content";
 import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
@@ -12,9 +12,11 @@ import { cn } from "@/lib/cn";
  */
 export function SolutionPackages({
   packages,
+  topic,
   shop = false,
 }: {
   packages: NonNullable<SolutionPage["packages"]>;
+  topic: ContactTopic;
   shop?: boolean;
 }) {
   const { pill, heading, intro, items } = packages;
@@ -51,7 +53,7 @@ export function SolutionPackages({
               </ul>
               <div className="mt-auto flex flex-wrap gap-2 pt-8">
                 <a
-                  href="#contact"
+                  href={contactHref(topic)}
                   className="press group inline-flex h-11 items-center gap-2 rounded-full bg-ink pr-4 pl-5 text-sm font-medium text-white"
                 >
                   Request a quote

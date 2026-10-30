@@ -38,4 +38,6 @@ partner logos, testimonials, office addresses, phone numbers, hours, photos and 
 
 To add an office photo, put it in `public/images/about/` and set that office's `image` field in `lib/content.ts`.
 
+The contact form (`components/contact/message-form.tsx`) has no backend yet. Sending opens the visitor's email app addressed to `contactEmail` in `lib/content.ts`. Connect a form service or API route in its `send` function when one is ready. Buttons across the site link to it with `contactHref(topic)`, which preselects the enquiry topic.
+
 The hero photo (`public/images/hero-engineer.png`) is AI-generated. Swap in a real photo of the IDN team when one is available.

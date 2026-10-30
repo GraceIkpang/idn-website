@@ -4,7 +4,7 @@ export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Solutions", href: "/#solutions" },
-  { label: "Products", href: "/#tapsun" },
+  { label: "TapSun", href: "/#tapsun" },
 ] as const;
 
 export const solutions = [
@@ -149,7 +149,7 @@ export const partners = ["Logoipsum", "Northwind", "Kestrel", "Halcyon", "Meridi
 // Sectors IDN serves, drawn from the client testimonials.
 export const sectors = ["Financial services", "Education", "Retail", "Enterprise", "Homes"] as const;
 
-type Office = {
+export type Office = {
   city: string;
   address: string;
   phone: string;
@@ -157,29 +157,30 @@ type Office = {
   hours: string;
   /** Path under /public. Null shows a placeholder panel until a photo is added. */
   image: string | null;
-  /** Google Maps link for the office. */
-  directions: string;
 };
 
-// PLACEHOLDER contact details, hours, photos and map links.
+/** Google Maps embed and directions links, built from the address so they always match it. */
+export const mapEmbedUrl = (o: Office) => `https://maps.google.com/maps?q=${encodeURIComponent(o.address)}&z=15&output=embed`;
+export const directionsUrl = (o: Office) =>
+  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(o.address)}`;
+
+// PLACEHOLDER addresses, phone numbers, hours and photos (addresses and numbers are from the design mock-up).
 export const offices: readonly Office[] = [
   {
     city: "Abuja",
-    address: "Office address, Abuja, FCT",
-    phone: "+234 000 000 0000",
+    address: "Plot 1234, Wuse Zone 5, Abuja, FCT, Nigeria",
+    phone: "+234 803 000 0001",
     email: "abuja@idn.ng",
     hours: "Monday to Friday, 8:00 to 17:00",
     image: null,
-    directions: "https://maps.google.com/?q=Abuja",
   },
   {
     city: "Lagos",
-    address: "Office address, Lagos",
-    phone: "+234 000 000 0000",
+    address: "3A Kofo Abayomi Street, Victoria Island, Lagos, Nigeria",
+    phone: "+234 803 000 0002",
     email: "lagos@idn.ng",
     hours: "Monday to Friday, 8:00 to 17:00",
     image: null,
-    directions: "https://maps.google.com/?q=Lagos",
   },
 ];
 
@@ -191,7 +192,7 @@ export const footerLinks = {
   Company: [
     { label: "Home", href: "/" },
     { label: "About us", href: "/about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/contact" },
   ],
   Solutions: [
     { label: "Alternative power", href: "/solutions/alternative-power" },
@@ -234,3 +235,22 @@ export const entities = [
   { name: "Interdigital", focus: "Cloud computing and processing", color: "var(--color-interdigital)" },
   { name: "Intercom", focus: "Secure routing and voice networks", color: "var(--color-intercom)" },
 ] as const;
+
+// Contact page
+
+/** Where general enquiries go. PLACEHOLDER: confirm the inbox with IDN. */
+export const contactEmail = "hello@idn.ng";
+
+export const contactTopics = [
+  { id: "power", label: "Alternative power" },
+  { id: "networking", label: "Networking" },
+  { id: "software", label: "Software" },
+  { id: "tapsun", label: "TapSun products" },
+  { id: "partnerships", label: "Partnerships" },
+  { id: "general", label: "General enquiry" },
+] as const;
+
+export type ContactTopic = (typeof contactTopics)[number]["id"];
+
+/** Link to the contact form, optionally with a topic already chosen. */
+export const contactHref = (topic?: ContactTopic) => (topic ? `/contact?topic=${topic}#message` : "/contact#message");

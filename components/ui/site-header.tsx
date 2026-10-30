@@ -12,7 +12,7 @@ import { cn } from "@/lib/cn";
 
 export type Page = (typeof nav)[number]["label"];
 
-export function NavLinks({ dark, current, id }: { dark: boolean; current: Page; id: "top" | "sticky" }) {
+export function NavLinks({ dark, current, id }: { dark: boolean; current?: Page; id: "top" | "sticky" }) {
   return (
     <ul className="hidden items-center gap-1 lg:flex">
       {nav.map((item) =>
@@ -43,20 +43,20 @@ export function NavLinks({ dark, current, id }: { dark: boolean; current: Page; 
 
 export function ContactButton({ className }: { className?: string }) {
   return (
-    <a
-      href="#contact"
+    <Link
+      href="/contact"
       className={cn(
         "press hidden h-11 items-center rounded-full bg-ink px-6 text-[15px] font-medium text-white sm:inline-flex",
         className,
       )}
     >
       Contact us
-    </a>
+    </Link>
   );
 }
 
 /** Top-of-page nav row. `dark` sets light text for use over imagery. */
-export function TopNav({ dark = false, current }: { dark?: boolean; current: Page }) {
+export function TopNav({ dark = false, current }: { dark?: boolean; current?: Page }) {
   return (
     <nav aria-label="Main" className="flex items-center justify-between px-5 pt-5 sm:px-8 sm:pt-7">
       <Logo className="text-gold" />
@@ -70,7 +70,7 @@ export function TopNav({ dark = false, current }: { dark?: boolean; current: Pag
 }
 
 /** Floating pill header that takes over once the top nav scrolls away. */
-export function StickyHeader({ current, threshold = 560 }: { current: Page; threshold?: number }) {
+export function StickyHeader({ current, threshold = 560 }: { current?: Page; threshold?: number }) {
   const visible = useScrolled(threshold);
   return (
     <AnimatePresence>
