@@ -12,6 +12,8 @@ export const solutions = [
     id: "power",
     index: "01",
     title: "Alternative power",
+    href: "/solutions/alternative-power",
+    blurb: "Solar, inverters and battery backup",
     summary:
       "Solar, inverter and battery systems sized to your load, installed and maintained by our own engineers.",
     points: ["Load assessment", "Solar and inverter installs", "Backup and maintenance"],
@@ -24,6 +26,8 @@ export const solutions = [
     id: "networking",
     index: "02",
     title: "Networking",
+    href: "/solutions/networking",
+    blurb: "Fibre, cabling and secure intercom",
     summary:
       "Enterprise fiber, structured cabling and secure intercom setups that stay fast and stay up.",
     points: ["Fiber and structured cabling", "Network design", "Secure intercommunication"],
@@ -35,6 +39,8 @@ export const solutions = [
     id: "software",
     index: "03",
     title: "Software",
+    href: "/solutions/software",
+    blurb: "Custom tools and workflow automation",
     summary:
       "Custom digital tools and workflow automation that cut downtime and help teams scale with confidence.",
     points: ["Custom internal tools", "Workflow automation", "Systems integration"],
@@ -177,6 +183,9 @@ export const offices: readonly Office[] = [
   },
 ];
 
+// PLACEHOLDER: the TapSun marketplace URL. While null, TapSun buttons fall back to the contact section.
+export const tapsunUrl: string | null = null;
+
 // PLACEHOLDER social URLs.
 export const footerLinks = {
   Company: [
@@ -185,9 +194,9 @@ export const footerLinks = {
     { label: "Contact", href: "#contact" },
   ],
   Solutions: [
-    { label: "Alternative power", href: "/#solutions" },
-    { label: "Networking", href: "/#solutions" },
-    { label: "Software", href: "/#solutions" },
+    { label: "Alternative power", href: "/solutions/alternative-power" },
+    { label: "Networking", href: "/solutions/networking" },
+    { label: "Software", href: "/solutions/software" },
     { label: "TapSun", href: "/#tapsun" },
   ],
   Social: [

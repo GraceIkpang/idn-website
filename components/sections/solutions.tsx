@@ -2,15 +2,14 @@
 
 import { useId, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, CodeXml, Network, Plus, Zap } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
+import { solutionIcons as icons } from "@/components/ui/solution-icons";
 import { solutions } from "@/lib/content";
 import { motion } from "motion/react";
 import { sectionHeading, wrap } from "@/lib/layout";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { duration, ease, stagger } from "@/lib/motion";
-
-const icons = { power: Zap, networking: Network, software: CodeXml } as const;
 
 const item = {
   hidden: { opacity: 0, y: 16 },

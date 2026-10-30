@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { AnimatePresence, motion, useAnimationFrame, useInView, useMotionValue } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { entities } from "@/lib/content";
 import { sectionHeading, wrap } from "@/lib/layout";
 import { duration, ease } from "@/lib/motion";
+import { useAutoCycle } from "@/lib/use-auto-cycle";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
@@ -19,27 +19,7 @@ const longest = entities.reduce((a, b) => (b.name.length > a.length ? b.name : a
  * and its colour shifts gold, blue, red. Hovering or focusing the showcase pauses it; the legend jumps to an entity.
  */
 export function Identity() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const showcase = useRef<HTMLDivElement>(null);
-  const inView = useInView(showcase, { amount: 0.4 });
-  const progress = useMotionValue(0);
-
-  useAnimationFrame((_, delta) => {
-    if (paused || !inView) return;
-    const next = progress.get() + delta / DWELL;
-    if (next >= 1) {
-      progress.set(0);
-      setActive((i) => (i + 1) % entities.length);
-    } else {
-      progress.set(next);
-    }
-  });
-
-  const select = (i: number) => {
-    progress.set(0);
-    setActive(i);
-  };
+  const { ref: showcase, active, select, progress, pauseProps } = useAutoCycle<HTMLDivElement>(entities.length, DWELL);
 
   const current = entities[active];
 
@@ -63,10 +43,7 @@ export function Identity() {
           <Reveal delay={0.1} className="mt-12 sm:mt-16">
             <div
               ref={showcase}
-              onPointerEnter={() => setPaused(true)}
-              onPointerLeave={() => setPaused(false)}
-              onFocus={() => setPaused(true)}
-              onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setPaused(false)}
+              {...pauseProps}
               className="grid gap-2"
             >
               <div

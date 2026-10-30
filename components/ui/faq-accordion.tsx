@@ -9,14 +9,24 @@ import { cn } from "@/lib/cn";
 
 type Tone = "card" | "line";
 
-/** Single-open accordion. "card" = filled rows, "line" = hairline-divided rows. */
-export function FaqAccordion({ tone = "card", className }: { tone?: Tone; className?: string }) {
+type Item = { q: string; a: string };
+
+/** Single-open accordion. "card" = filled rows, "line" = hairline-divided rows. Defaults to the site FAQs. */
+export function FaqAccordion({
+  tone = "card",
+  items = faqs,
+  className,
+}: {
+  tone?: Tone;
+  items?: readonly Item[];
+  className?: string;
+}) {
   const [open, setOpen] = useState<number | null>(1);
   const baseId = useId();
 
   return (
     <ul className={cn(tone === "card" ? "space-y-3" : "border-t border-line", className)}>
-      {faqs.map((item, i) => {
+      {items.map((item, i) => {
         const isOpen = open === i;
         const panelId = `${baseId}-panel-${i}`;
         const buttonId = `${baseId}-button-${i}`;
