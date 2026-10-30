@@ -182,11 +182,12 @@ export function MessageForm() {
             </fieldset>
           </Reveal>
 
-          <Reveal delay={0.1} className="lg:col-span-7">
-            <div className="rounded-[28px] bg-layer-1 p-2">
-              <div className="rounded-[20px] bg-surface p-6 sm:p-10">
+          {/* On desktop the card stretches to the topic list's height and the message box takes up the extra room. */}
+          <Reveal delay={0.1} className="lg:col-span-7 lg:flex lg:flex-col">
+            <div className="rounded-[28px] bg-layer-1 p-2 lg:flex lg:flex-1 lg:flex-col">
+              <div className="rounded-[20px] bg-surface p-6 sm:p-10 lg:flex lg:flex-1 lg:flex-col">
                 {sentTo ? (
-                  <div role="status" className="flex min-h-[420px] flex-col items-start justify-center">
+                  <div role="status" className="flex min-h-[420px] flex-col items-start justify-center lg:flex-1">
                     <span className="grid size-14 place-items-center rounded-full bg-gold-tint text-gold-ink">
                       <MailCheck aria-hidden className="size-6" strokeWidth={1.75} />
                     </span>
@@ -216,7 +217,7 @@ export function MessageForm() {
                     <p className="mt-2 text-base text-text-secondary">
                       Topic: <span className="font-medium text-text-primary">{topicLabel}</span>
                     </p>
-                    <div className="mt-8 grid gap-5 sm:grid-cols-2">
+                    <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:flex-1 lg:grid-rows-[auto_auto_1fr]">
                       <TextField id={id("name")} name="name" label="Full name" required autoComplete="name" placeholder="Emeka Okafor" error={errors.name} />
                       <TextField
                         id={id("email")}
@@ -231,7 +232,7 @@ export function MessageForm() {
                       />
                       <TextField id={id("phone")} name="phone" type="tel" inputMode="tel" label="Phone" autoComplete="tel" placeholder="+234 803 000 0000" />
                       <TextField id={id("company")} name="company" label="Company" autoComplete="organization" />
-                      <div className="sm:col-span-2">
+                      <div className="sm:col-span-2 lg:flex lg:flex-col">
                         <label htmlFor={id("message")} className="text-sm font-medium">
                           Message<span className="text-text-muted"> (required)</span>
                         </label>
@@ -244,7 +245,7 @@ export function MessageForm() {
                           placeholder="Tell us about your site, your project or your question."
                           aria-invalid={errors.message ? true : undefined}
                           aria-describedby={errors.message ? `${id("message")}-error` : undefined}
-                          className={cn(inputClass, "mt-2 resize-y py-3")}
+                          className={cn(inputClass, "mt-2 resize-y py-3 lg:min-h-40 lg:flex-1")}
                         />
                         {errors.message && (
                           <p id={`${id("message")}-error`} className="mt-2 text-sm text-intercom">
