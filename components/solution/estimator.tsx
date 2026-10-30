@@ -45,7 +45,7 @@ export function SolutionEstimator({
   const fill = ((spend - min) / (max - min)) * 100;
 
   return (
-    <section aria-labelledby="estimator-title" className={sectionSpace}>
+    <section id="estimator" aria-labelledby="estimator-title" className={cn("scroll-mt-24", sectionSpace)}>
       <div className={wrap}>
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">
@@ -116,7 +116,10 @@ export function SolutionEstimator({
                 </a>
               )}
               <a
-                href={contactHref(topic)}
+                href={contactHref(
+                  topic,
+                  `We spend about ${naira.format(spend)} a month on fuel and grid power. Your estimator suggested about ${r.solarKw} kW of solar and ${r.batteryKwh} kWh of battery storage${pkg ? ` (closest package: ${pkg.name})` : ""}. Please send us an exact quote.`,
+                )}
                 className="press group inline-flex h-12 w-fit items-center gap-3 rounded-full bg-gold pr-2 pl-5 text-base font-medium text-ink"
               >
                 Get an exact quote

@@ -135,7 +135,12 @@ export function SolutionHealthCheck({
                 {ticked.size} of {symptoms.length} ticked
               </p>
               <a
-                href={contactHref(topic)}
+                href={contactHref(
+                  topic,
+                  ticked.size
+                    ? `We'd like a network audit. Problems we've noticed: ${[...ticked].map((i) => symptoms[i].label).join("; ")}.`
+                    : "We'd like a network audit.",
+                )}
                 className="press group inline-flex h-12 w-fit items-center gap-3 rounded-full bg-gold pr-2 pl-5 text-base font-medium text-ink"
               >
                 Book a network audit

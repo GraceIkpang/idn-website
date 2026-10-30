@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { nav, solutions } from "@/lib/content";
+import { externalProps, nav, solutions } from "@/lib/content";
 import { duration, ease, stagger } from "@/lib/motion";
 import { solutionIcons } from "@/components/ui/solution-icons";
 import { cn } from "@/lib/cn";
@@ -87,6 +87,7 @@ export function MobileMenu({ light = false, cta = "Contact us" }: { light?: bool
                   <a
                     ref={i === 0 ? firstLink : undefined}
                     href={item.href}
+                    {...externalProps(item.href)}
                     onClick={() => setOpen(false)}
                     className="block py-5 text-3xl font-medium tracking-tight"
                   >

@@ -54,13 +54,13 @@ export default async function SolutionRoute({ params }: Props) {
         {page.process && (
           <SolutionProcess heading={page.process.heading} steps={page.process.steps} layout={page.process.layout} />
         )}
-        {page.teaser && <SolutionTeaser teaser={page.teaser} topic={page.id} />}
+        {page.teaser && <SolutionTeaser teaser={page.teaser} />}
         {page.project && <SolutionProject project={page.project} />}
         {page.assurances && <SolutionAssurances assurances={page.assurances} />}
         {page.faqs && <SolutionFaq title={page.title} items={page.faqs} />}
         <SolutionRelated current={page.id} />
       </main>
-      <Footer />
+      <Footer topic={page.id} />
     </>
   );
 }

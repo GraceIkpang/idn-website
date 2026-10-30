@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { sectionSpace } from "@/lib/layout";
 import { PageHero } from "@/components/ui/page-hero";
@@ -39,10 +38,7 @@ export default function ContactPage() {
           // Top padding is one section gap minus the hero frame padding, as on the solution pages.
           className={cn("pt-22 sm:pt-29", sectionSpace)}
         />
-        {/* The form reads ?topic= from the URL, which needs a Suspense boundary on a static page. */}
-        <Suspense>
-          <MessageForm />
-        </Suspense>
+        <MessageForm />
       </main>
       <Footer cta={false} />
     </>

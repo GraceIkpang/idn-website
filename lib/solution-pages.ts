@@ -143,7 +143,8 @@ export const solutionPages: readonly SolutionPage[] = [
         key: "challenge",
         title: "The challenge",
         body: "Unreliable power supply, rising energy costs and generator dependence disrupt productivity and drive up operating expenses.",
-        image: `${power}/challenge.jpg`,
+        // Generated stand-in: swap for a real photo when one is available.
+        image: `${power}/challenge-generator.jpg`,
       },
       {
         key: "approach",

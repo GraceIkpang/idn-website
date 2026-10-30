@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { duration, ease, stagger } from "@/lib/motion";
@@ -75,12 +76,12 @@ export function Hero() {
                     <ArrowUpRight className="size-4" strokeWidth={2} />
                   </span>
                 </a>
-                <a
-                  href="#tapsun"
+                <Link
+                  href="/solutions/alternative-power#estimator"
                   className="press inline-flex h-14 items-center justify-center rounded-full bg-white/12 px-6 text-base font-medium backdrop-blur-md transition-colors duration-150 hover:bg-white/20"
                 >
                   Get a backup recommendation
-                </a>
+                </Link>
               </motion.div>
             </div>
           </motion.div>

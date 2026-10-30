@@ -1,8 +1,20 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { ArrowRight, Check, CodeXml, Handshake, MailCheck, MessageCircle, Network, ShoppingBag, Zap, type LucideIcon } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
+import {
+  ArrowRight,
+  CalendarCheck,
+  Check,
+  CodeXml,
+  Handshake,
+  MailCheck,
+  MessageCircle,
+  Network,
+  ShoppingBag,
+  Sparkles,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { contactEmail, contactTopics, offices, type ContactTopic } from "@/lib/content";
 import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
@@ -14,6 +26,8 @@ const topicIcons: Record<ContactTopic, LucideIcon> = {
   networking: Network,
   software: CodeXml,
   tapsun: ShoppingBag,
+  consultation: CalendarCheck,
+  ai: Sparkles,
   partnerships: Handshake,
   general: MessageCircle,
 };
@@ -67,13 +81,22 @@ function TextField({
 
 /**
  * General enquiry form. The topic list on the left is part of the form, so the enquiry type is asked once.
- * `?topic=` in the URL preselects a topic. PLACEHOLDER: there is no backend yet, so sending opens the visitor's
- * email app with the message filled in. Swap `send` for a form service or API route when one is ready.
+ * `?topic=` preselects a topic and `?message=` starts the message (see contactHref). They are read after the
+ * page loads, so the form itself renders on the server like the rest of the page.
+ * PLACEHOLDER: there is no backend yet, so sending opens the visitor's email app with the message filled in.
+ * Swap `send` for a form service or API route when one is ready.
  */
 export function MessageForm() {
-  const params = useSearchParams();
-  const initial = params.get("topic");
-  const [topic, setTopic] = useState<ContactTopic>(isTopic(initial) ? initial : "general");
+  const [topic, setTopic] = useState<ContactTopic>("general");
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get("topic");
+    if (isTopic(t)) setTopic(t);
+    const m = params.get("message");
+    if (m) setMessage(m);
+  }, []);
   const [errors, setErrors] = useState<Errors>({});
   const [sentTo, setSentTo] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -180,7 +203,7 @@ export function MessageForm() {
                       type="button"
                       onClick={() => {
                         setSentTo(null);
-                        formRef.current?.reset();
+                        setMessage("");
                       }}
                       className="press mt-8 inline-flex h-12 items-center rounded-full bg-layer-1 px-5 text-base font-medium transition-colors duration-150 hover:bg-layer-2"
                     >
@@ -216,6 +239,8 @@ export function MessageForm() {
                           id={id("message")}
                           name="message"
                           rows={6}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
                           placeholder="Tell us about your site, your project or your question."
                           aria-invalid={errors.message ? true : undefined}
                           aria-describedby={errors.message ? `${id("message")}-error` : undefined}

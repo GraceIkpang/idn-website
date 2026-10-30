@@ -129,7 +129,12 @@ export function SolutionScoper({ scoper, topic }: { scoper: NonNullable<Solution
 
             <div className="mt-auto pt-10">
               <a
-                href={contactHref(topic)}
+                href={contactHref(
+                  topic,
+                  `We're planning a ${platforms[platform].label.toLowerCase()}${
+                    picked.size ? ` with ${[...picked].map((i) => features[i].label.toLowerCase()).join(", ")}` : ""
+                  }. Your scoper estimated ${lo} to ${hi} weeks. We'd like to book a discovery call.`,
+                )}
                 className="press group inline-flex h-12 w-fit items-center gap-3 rounded-full bg-gold pr-2 pl-5 text-base font-medium text-ink"
               >
                 Book a discovery call

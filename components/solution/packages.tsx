@@ -53,7 +53,7 @@ export function SolutionPackages({
               </ul>
               <div className="mt-auto flex flex-wrap gap-2 pt-8">
                 <a
-                  href={contactHref(topic)}
+                  href={contactHref(topic, `We're interested in the ${p.name} option. Please send us a quote.`)}
                   className="press group inline-flex h-11 items-center gap-2 rounded-full bg-ink pr-4 pl-5 text-sm font-medium text-white"
                 >
                   Request a quote

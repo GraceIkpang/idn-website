@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { nav } from "@/lib/content";
+import { externalProps, nav } from "@/lib/content";
 import { duration, ease } from "@/lib/motion";
 import { useScrolled } from "@/lib/use-scrolled";
 import { Logo } from "@/components/ui/logo";
@@ -24,6 +24,7 @@ export function NavLinks({ dark, current, id }: { dark: boolean; current?: Page;
           <li key={item.href}>
             <Link
               href={item.href}
+              {...externalProps(item.href)}
               aria-current={item.label === current ? "page" : undefined}
               className={cn(
                 "inline-flex h-10 items-center gap-1 rounded-full px-4 text-[15px] transition-colors duration-150",

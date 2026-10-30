@@ -1,10 +1,13 @@
 "use client";
 
 import { useId, useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-/** Front-end only: validates and shows a success state. Wire `onSubmit` to the real list provider. */
+/**
+ * PLACEHOLDER: no mailing list is connected yet, so a valid email is not saved and the message says so honestly.
+ * Wire `onSubmit` to the list provider, then restore a real confirmation.
+ */
 export function NewsletterForm({ className }: { className?: string }) {
   const id = useId();
   const [state, setState] = useState<"idle" | "error" | "done">("idle");
@@ -19,8 +22,9 @@ export function NewsletterForm({ className }: { className?: string }) {
         setState(/^\S+@\S+\.\S+$/.test(email) ? "done" : "error");
       }}
     >
-      <label htmlFor={id} className="text-base font-medium">
+      <label htmlFor={id} className="flex items-center gap-2 text-base font-medium">
         Subscribe to our newsletter
+        <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs font-normal text-white/70">Coming soon</span>
       </label>
       <div
         className={cn(
@@ -45,12 +49,12 @@ export function NewsletterForm({ className }: { className?: string }) {
           aria-label="Subscribe"
           className="press grid size-11 shrink-0 place-items-center rounded-full bg-gold text-ink"
         >
-          {state === "done" ? <Check className="size-4" strokeWidth={2} /> : <ArrowRight className="size-4" strokeWidth={2} />}
+          <ArrowRight className="size-4" strokeWidth={2} />
         </button>
       </div>
       <p id={`${id}-msg`} role="status" className="mt-2 min-h-5 text-sm text-white/60">
         {state === "error" && "Enter a valid email address."}
-        {state === "done" && "Thanks, you are on the list."}
+        {state === "done" && "Thanks. Sign-ups open soon, so we have not saved your email yet."}
       </p>
     </form>
   );

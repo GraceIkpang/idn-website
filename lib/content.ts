@@ -1,10 +1,20 @@
 // Site copy. Items marked PLACEHOLDER need real data from IDN.
 
+// PLACEHOLDER: the TapSun marketplace URL. While null, TapSun links point to the TapSun section on the home page
+// and the "Shop kits on TapSun" buttons stay hidden.
+export const tapsunUrl: string | null = null;
+export const tapsunHref = tapsunUrl ?? "/#tapsun";
+
+/** True for links that leave the site, so they can open in a new tab. */
+export const isExternal = (href: string) => /^https?:\/\//.test(href);
+/** Spread onto a link so external destinations open in a new tab. */
+export const externalProps = (href: string) => (isExternal(href) ? { target: "_blank", rel: "noopener" } : {});
+
 export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Solutions", href: "/#solutions" },
-  { label: "TapSun", href: "/#tapsun" },
+  { label: "TapSun", href: tapsunHref },
 ] as const;
 
 export const solutions = [
@@ -184,10 +194,7 @@ export const offices: readonly Office[] = [
   },
 ];
 
-// PLACEHOLDER: the TapSun marketplace URL. While null, TapSun buttons fall back to the contact section.
-export const tapsunUrl: string | null = null;
-
-// PLACEHOLDER social URLs.
+// PLACEHOLDER social URLs. Links left as "#" are hidden until a real URL is added.
 export const footerLinks = {
   Company: [
     { label: "Home", href: "/" },
@@ -198,7 +205,7 @@ export const footerLinks = {
     { label: "Alternative power", href: "/solutions/alternative-power" },
     { label: "Networking", href: "/solutions/networking" },
     { label: "Software", href: "/solutions/software" },
-    { label: "TapSun", href: "/#tapsun" },
+    { label: "TapSun", href: tapsunHref },
   ],
   Social: [
     { label: "Instagram", href: "#" },
@@ -246,11 +253,19 @@ export const contactTopics = [
   { id: "networking", label: "Networking" },
   { id: "software", label: "Software" },
   { id: "tapsun", label: "TapSun products" },
+  { id: "consultation", label: "Free consultation" },
+  { id: "ai", label: "IDN AI early access" },
   { id: "partnerships", label: "Partnerships" },
   { id: "general", label: "General enquiry" },
 ] as const;
 
 export type ContactTopic = (typeof contactTopics)[number]["id"];
 
-/** Link to the contact form, optionally with a topic already chosen. */
-export const contactHref = (topic?: ContactTopic) => (topic ? `/contact?topic=${topic}#message` : "/contact#message");
+/** Link to the contact form, optionally with a topic chosen and the message started for the visitor. */
+export const contactHref = (topic?: ContactTopic, message?: string) => {
+  const params = new URLSearchParams();
+  if (topic) params.set("topic", topic);
+  if (message) params.set("message", message);
+  const query = params.toString();
+  return `/contact${query ? `?${query}` : ""}#message`;
+};

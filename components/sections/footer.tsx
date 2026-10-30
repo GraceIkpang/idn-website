@@ -1,13 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { contactHref, footerLinks, offices } from "@/lib/content";
+import { contactHref, externalProps, footerLinks, offices, type ContactTopic } from "@/lib/content";
 import { NewsletterForm } from "@/components/ui/newsletter-form";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 
-/** Site footer. `cta` adds the "Ready to power your next move?" block; the contact page leaves it out. */
-export function Footer({ cta = true }: { cta?: boolean }) {
+/**
+ * Site footer. `cta` adds the "Ready to power your next move?" block; the contact page leaves it out.
+ * `topic` preselects the enquiry topic behind "Talk to an engineer". Links still set to "#" are hidden.
+ */
+export function Footer({ cta = true, topic }: { cta?: boolean; topic?: ContactTopic }) {
+  const groups = Object.entries(footerLinks)
+    .map(([group, links]) => [group, links.filter((l) => l.href !== "#")] as const)
+    .filter(([, links]) => links.length > 0);
   return (
     <footer id="contact" className="p-2 sm:p-3">
       <div className="relative isolate overflow-hidden rounded-[24px] bg-ink text-white sm:rounded-[32px]">
@@ -30,7 +36,7 @@ export function Footer({ cta = true }: { cta?: boolean }) {
                 Talk to an engineer about your site. We will recommend the right system and send a clear quote.
               </p>
               <a
-                href={contactHref()}
+                href={contactHref(topic)}
                 className="press group inline-flex h-14 shrink-0 items-center justify-between gap-4 rounded-full bg-gold pr-2 pl-7 text-base font-medium text-ink sm:justify-start"
               >
                 Talk to an engineer
@@ -63,13 +69,17 @@ export function Footer({ cta = true }: { cta?: boolean }) {
           </div>
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
-            {Object.entries(footerLinks).map(([group, links]) => (
+            {groups.map(([group, links]) => (
               <div key={group}>
                 <p className="text-sm text-white/50">{group}</p>
                 <ul className="mt-4 space-y-3">
                   {links.map((l) => (
                     <li key={l.label}>
-                      <Link href={l.href} className="text-base text-white/85 transition-colors duration-150 hover:text-gold">
+                      <Link
+                        href={l.href}
+                        {...externalProps(l.href)}
+                        className="text-base text-white/85 transition-colors duration-150 hover:text-gold"
+                      >
                         {l.label}
                       </Link>
                     </li>
