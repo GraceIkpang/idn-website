@@ -4,7 +4,7 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion, type MotionValue } from "motion/react";
 import { BrickWall, Lightbulb, ThumbsUp } from "lucide-react";
 import type { StoryStep } from "@/lib/solution-pages";
-import { wrap } from "@/lib/layout";
+import { sectionSpace, wrap } from "@/lib/layout";
 import { duration, ease } from "@/lib/motion";
 import { useAutoCycle } from "@/lib/use-auto-cycle";
 import { Reveal } from "@/components/ui/reveal";
@@ -36,7 +36,7 @@ export function SolutionStory({ steps }: { steps: readonly StoryStep[] }) {
   const current = steps[active];
 
   return (
-    <section aria-labelledby="story-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="story-title" className={sectionSpace}>
       <h2 id="story-title" className="sr-only">
         The challenge, our approach and the benefits
       </h2>

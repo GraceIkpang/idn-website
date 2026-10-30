@@ -13,6 +13,9 @@
   --color-interdigital: #3550e0;
   --color-intercom: #d0262c;
 
+  /* IDN AI teaser surface: a deep navy that sits under the Interdigital blue. */
+  --color-navy: #0c2346;
+
   /* Neutrals */
   --color-surface: #ffffff;
   --color-layer-1: #f6f6f4;
@@ -30,6 +33,13 @@
 
   --animate-marquee: marquee 60s linear infinite;
   --animate-marquee-reverse: marquee 60s linear infinite reverse;
+  --animate-drift: drift 14s ease-in-out infinite alternate;
+  --animate-drift-slow: drift 20s ease-in-out infinite alternate-reverse;
+
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(-6%, 8%, 0) scale(1.08); }
+  }
 
   @keyframes marquee {
     from { transform: translate3d(0, 0, 0); }
@@ -60,7 +70,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .animate-marquee, .animate-marquee-reverse { animation: none; }
+  .animate-marquee, .animate-marquee-reverse, .animate-drift, .animate-drift-slow { animation: none; }
 }
 
 /* Logo mark is a raster with alpha, used as a mask so it takes any color. */

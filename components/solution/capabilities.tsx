@@ -1,5 +1,5 @@
 import type { SolutionPage } from "@/lib/solution-pages";
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 export function SolutionCapabilities({ capabilities }: { capabilities: NonNullable<SolutionPage["capabilities"]> }) {
   const { pill, heading, intro, groups } = capabilities;
   return (
-    <section aria-labelledby="capabilities-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="capabilities-title" className={sectionSpace}>
       <div className={wrap}>
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">

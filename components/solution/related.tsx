@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { solutions } from "@/lib/content";
-import { wrap } from "@/lib/layout";
+import { sectionSpace, wrap } from "@/lib/layout";
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { solutionIcons } from "@/components/ui/solution-icons";
 import type { SolutionPage } from "@/lib/solution-pages";
@@ -11,7 +11,7 @@ import type { SolutionPage } from "@/lib/solution-pages";
 export function SolutionRelated({ current }: { current: SolutionPage["id"] }) {
   const others = solutions.filter((s) => s.id !== current);
   return (
-    <section aria-labelledby="related-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="related-title" className={sectionSpace}>
       <div className={wrap}>
         <h2 id="related-title" className="text-sm text-text-muted">
           Explore other solutions

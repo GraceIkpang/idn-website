@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { SolutionPage } from "@/lib/solution-pages";
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
@@ -12,7 +12,7 @@ const bentoSpans = ["lg:col-span-6", "lg:col-span-6", "lg:col-span-7", "lg:col-s
 export function SolutionOfferings({ page }: { page: SolutionPage }) {
   const { heading, intro, items, layout = "grid" } = page.offerings;
   return (
-    <section id="offerings" aria-labelledby="offerings-title" className="scroll-mt-24 pb-24 sm:pb-32">
+    <section id="offerings" aria-labelledby="offerings-title" className={cn("scroll-mt-24", sectionSpace)}>
       <div className={wrap}>
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">
@@ -26,7 +26,56 @@ export function SolutionOfferings({ page }: { page: SolutionPage }) {
           </p>
         </Reveal>
 
-        {layout === "bento" ? (
+        {layout === "rows" ? (
+          <RevealGroup className="mt-12 grid gap-3 sm:mt-16">
+            {items.map((o) => (
+              <RevealItem
+                key={o.title}
+                className={cn(
+                  "flex flex-col-reverse gap-8 rounded-[24px] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8 lg:min-h-[220px] lg:px-10",
+                  o.featured ? "bg-ink text-white" : "bg-layer-1",
+                )}
+              >
+                <div className="min-w-0">
+                  <h3 className="text-xl font-medium tracking-[-0.02em] sm:text-2xl">{o.title}</h3>
+                  <p
+                    className={cn(
+                      "mt-2 max-w-[60ch] text-base leading-relaxed text-pretty",
+                      o.featured ? "text-white/70" : "text-text-secondary",
+                    )}
+                  >
+                    {o.body}
+                  </p>
+                  {o.tags && (
+                    <ul className="mt-5 flex flex-wrap gap-2">
+                      {o.tags.map((t) => (
+                        <li
+                          key={t}
+                          className={cn(
+                            "inline-flex h-8 items-center rounded-full px-3 text-sm whitespace-nowrap",
+                            o.featured ? "bg-white/10 text-white/85" : "bg-surface text-text-secondary",
+                          )}
+                        >
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <Image
+                  src={o.image}
+                  alt=""
+                  width={o.width}
+                  height={o.height}
+                  className={cn(
+                    "h-24 w-auto shrink-0 self-start object-contain outline-none sm:h-28 sm:self-auto",
+                    !o.featured && "opacity-80",
+                  )}
+                />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        ) : layout === "bento" ? (
           <RevealGroup className="mt-12 grid gap-3 sm:mt-16 lg:grid-cols-12">
             {items.map((o, i) => (
               <RevealItem

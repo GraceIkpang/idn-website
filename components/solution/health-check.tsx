@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Check } from "lucide-react";
 import type { SolutionPage } from "@/lib/solution-pages";
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { duration, ease } from "@/lib/motion";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
@@ -32,7 +32,7 @@ export function SolutionHealthCheck({ check }: { check: NonNullable<SolutionPage
     });
 
   return (
-    <section aria-labelledby="health-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="health-title" className={sectionSpace}>
       <div className={wrap}>
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">

@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import type { SolutionPage } from "@/lib/solution-pages";
 import { tapsunUrl } from "@/lib/content";
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
@@ -19,7 +19,7 @@ export function SolutionPackages({
 }) {
   const { pill, heading, intro, items } = packages;
   return (
-    <section id="packages" aria-labelledby="packages-title" className="scroll-mt-24 pb-24 sm:pb-32">
+    <section id="packages" aria-labelledby="packages-title" className={cn("scroll-mt-24", sectionSpace)}>
       <div className={wrap}>
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">

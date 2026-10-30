@@ -15,13 +15,15 @@ export type Offering = {
   image: string;
   width: number;
   height: number;
-  /** Dark card in the bento layout. The illustration should be light line art. */
+  /** Dark card in the bento and rows layouts. The illustration should be light line art. */
   featured?: boolean;
+  /** Short chips under the description, used by the rows layout. */
+  tags?: readonly string[];
 };
 
 export type Stat = { value: string; label: string };
 
-export type ProcessStep = { title: string; body: string; time: string };
+export type ProcessStep = { title: string; body: string; time?: string };
 
 export type Package = {
   name: string;
@@ -60,6 +62,14 @@ type SectionCopy = { pill: string; heading: readonly [string, string]; intro: st
 
 export type CapabilityGroup = { title: string; items: readonly string[] };
 
+/** Rough project timeline from a platform choice plus features, in weeks. */
+export type Scoper = {
+  platforms: readonly { label: string; weeks: readonly [number, number] }[];
+  features: readonly { label: string; weeks: readonly [number, number] }[];
+  /** Above this many weeks (upper estimate) we suggest a dedicated team instead of a fixed-scope project. */
+  teamThreshold: number;
+};
+
 /** One problem a visitor can tick, and the services that fix it (offering titles). */
 export type Symptom = { label: string; fixes: readonly string[] };
 
@@ -69,7 +79,7 @@ export type SolutionPage = {
   title: string;
   tagline: string;
   /** `focus` is the crop point on small screens; `focusLg` overrides it from the lg breakpoint. */
-  hero: { image: string; alt: string; focus: string; focusLg?: string; compact?: boolean };
+  hero: { image: string; alt: string; focus: string; focusLg?: string };
   overview: {
     lead: string;
     rest: string;
@@ -81,23 +91,35 @@ export type SolutionPage = {
   offerings: {
     heading: string;
     intro: string;
-    /** "grid": illustrated wells in one shell. "bento": uneven cards, illustration beside the text. */
-    layout?: "grid" | "bento";
+    /** "grid": illustrated wells in one shell. "bento": uneven cards. "rows": full-width cards with tags. */
+    layout?: "grid" | "bento" | "rows";
     items: readonly Offering[];
   };
   packages?: SectionCopy & { items: readonly Package[] };
   estimator?: Estimator;
   /** Heading is [plain part, gold part]. */
-  process?: { heading: readonly [string, string]; steps: readonly ProcessStep[] };
+  /** "line": steps under hairlines. "cards": numbered white cards in a shell. */
+  process?: { heading: readonly [string, string]; layout?: "line" | "cards"; steps: readonly ProcessStep[] };
   project?: FeaturedProject;
   assurances?: SectionCopy & { items: readonly Assurance[]; brands: readonly string[] };
   capabilities?: SectionCopy & { groups: readonly CapabilityGroup[] };
   healthCheck?: SectionCopy & { symptoms: readonly Symptom[] };
+  scoper?: SectionCopy & Scoper;
+  teaser?: {
+    tag: string;
+    title: string;
+    body: string;
+    abilities: readonly string[];
+    cta: string;
+    /** Example questions the preview panel plays through. */
+    examples: readonly { prompt: string; answer: string; source: string }[];
+  };
   faqs?: readonly { q: string; a: string }[];
 };
 
 const power = "/images/solutions/alternative-power";
 const net = "/images/solutions/networking";
+const soft = "/images/solutions/software";
 
 export const solutionPages: readonly SolutionPage[] = [
   {
@@ -306,7 +328,6 @@ export const solutionPages: readonly SolutionPage[] = [
       focus: "22% center",
       // Wide screens show most of the banner; this keeps the engineer fully in frame on the right.
       focusLg: "85% center",
-      compact: true,
     },
     overview: {
       lead: "From structured cabling to enterprise-wide connectivity, IDN designs dependable",
@@ -496,6 +517,221 @@ export const solutionPages: readonly SolutionPage[] = [
       {
         q: "How do you keep the network secure?",
         a: "We separate traffic with VLANs, configure firewalls and secure Wi-Fi, and control who can access what.",
+      },
+    ],
+  },
+  {
+    slug: "software",
+    id: "software",
+    title: "Software",
+    tagline: "Custom web and mobile software, automation and technology advice, built around how your business really works.",
+    hero: {
+      image: `${soft}/hero.jpg`,
+      alt: "Developer's monitor showing code and a project file tree",
+      focus: "55% center",
+      focusLg: "60% center",
+    },
+    overview: {
+      lead: "From idea to deployment, IDN builds",
+      rest: "software that works as hard as your business demands.",
+      feature: {
+        image: `${soft}/overview.jpg`,
+        alt: "Three IDN team members reviewing work on a tablet together",
+        title: "Built for scale, designed for people",
+        // The original design repeated the networking caption here.
+        body: "Software shaped around how your team actually works, ready to grow when you do.",
+      },
+    },
+    // Capability highlights rather than achievement figures, so nothing here needs verifying.
+    stats: [
+      { value: "Web + mobile", label: "One team for every platform" },
+      { value: "Local", label: "Payments, SMS and WhatsApp ready" },
+      { value: "NDPA", label: "Data protection by design" },
+      { value: "Cloud", label: "AWS, Azure or Google Cloud" },
+    ],
+    offerings: {
+      heading: "Our software solutions",
+      intro: "End-to-end capabilities for organisations ready to lead with technology.",
+      layout: "rows",
+      items: [
+        {
+          title: "Custom software development",
+          body: "Bespoke applications designed around your business processes, from mobile apps to enterprise platforms.",
+          image: `${soft}/custom.png`,
+          width: 218,
+          height: 171,
+          featured: true,
+          tags: ["Web apps", "Mobile", "APIs", "Enterprise"],
+        },
+        {
+          title: "Digital transformation",
+          body: "Modernise legacy operations with cloud infrastructure, automated workflows and dependable data pipelines.",
+          image: `${soft}/automation.png`,
+          width: 164,
+          height: 126,
+          tags: ["Cloud migration", "Automation", "Process design"],
+        },
+        {
+          title: "Technology consulting",
+          body: "Strategic guidance on architecture, stack selection, vendor evaluation and long-term technology roadmaps.",
+          image: `${soft}/consulting.png`,
+          width: 183,
+          height: 152,
+          tags: ["Architecture", "Stack review", "Roadmaps"],
+        },
+        {
+          title: "Product development",
+          body: "An end-to-end product studio, from ideas and UX research through launch, iteration and growth.",
+          image: `${soft}/product.png`,
+          width: 223,
+          height: 116,
+          tags: ["UX and UI design", "Prototyping", "Launch", "Growth"],
+        },
+      ],
+    },
+    // PLACEHOLDER: confirm the platforms and integrations IDN supports.
+    capabilities: {
+      pill: "What we work with",
+      heading: ["Fits into", "how you already work."],
+      intro: "We build on proven platforms and connect to the tools your business already relies on.",
+      groups: [
+        { title: "Platforms", items: ["Web applications", "iOS and Android apps", "Internal dashboards", "APIs and integrations"] },
+        {
+          title: "Integrations",
+          items: ["Payments such as Paystack and Flutterwave", "Accounting and ERP systems", "Microsoft 365 and Google Workspace", "WhatsApp, SMS and email"],
+        },
+        { title: "Cloud and data", items: ["AWS, Azure and Google Cloud", "Data pipelines", "Reporting dashboards", "Automated backups"] },
+        {
+          title: "Security",
+          items: ["Role-based access", "Encryption in transit and at rest", "Audit logs", "Nigeria Data Protection Act compliance"],
+        },
+        { title: "After launch", items: ["Monitoring and alerts", "Bug fixes and updates", "New features", "User training"] },
+      ],
+    },
+    // PLACEHOLDER week ranges: rough guides until IDN confirms its own.
+    scoper: {
+      pill: "Project scoper",
+      heading: ["How long would", "it take?"],
+      intro: "Pick what you need for a rough timeline and the best way to work with us. No commitment, no email needed.",
+      platforms: [
+        { label: "Web app", weeks: [4, 6] },
+        { label: "Mobile app", weeks: [6, 8] },
+        { label: "Web and mobile", weeks: [8, 12] },
+      ],
+      features: [
+        { label: "User accounts", weeks: [1, 2] },
+        { label: "Payments", weeks: [2, 3] },
+        { label: "Admin dashboard", weeks: [2, 4] },
+        { label: "Reports and analytics", weeks: [2, 3] },
+        { label: "Connect existing systems", weeks: [2, 4] },
+        { label: "Notifications", weeks: [1, 2] },
+        { label: "Workflow automation", weeks: [2, 4] },
+        { label: "Offline mode", weeks: [2, 3] },
+      ],
+      teamThreshold: 16,
+    },
+    // PLACEHOLDER: confirm engagement models with IDN.
+    packages: {
+      pill: "Ways to work with us",
+      heading: ["Pick the model", "that fits the work."],
+      intro: "A clear scope suits a fixed price. Bigger or evolving products suit a dedicated team.",
+      items: [
+        {
+          name: "Fixed-scope project",
+          audience: "A clear brief with a defined outcome",
+          system: "One price and one delivery date, agreed up front",
+          includes: ["Discovery workshop", "Design and build", "Testing and launch", "30 days of post-launch fixes"],
+        },
+        {
+          name: "Dedicated team",
+          audience: "Larger products that keep evolving",
+          system: "A team in weekly sprints, billed monthly",
+          includes: ["Product lead and developers", "Weekly demos", "Flexible priorities", "Shared roadmap"],
+        },
+        {
+          name: "Support and maintenance",
+          audience: "Software that is already live",
+          system: "A monthly plan to keep it healthy and improving",
+          includes: ["Monitoring and alerts", "Bug fixes and updates", "Agreed response times", "Small improvements"],
+        },
+      ],
+    },
+    process: {
+      heading: ["Our process,", "start to launch."],
+      layout: "cards",
+      steps: [
+        { title: "Discover", body: "We map your challenges, goals and constraints through structured workshops and stakeholder interviews." },
+        { title: "Design", body: "Wireframes, architecture diagrams and technical specs, all agreed before a single line of production code." },
+        { title: "Develop", body: "Agile sprints with continuous delivery, weekly demos and real-time updates in your preferred channel." },
+        { title: "Deploy", body: "Automated releases, production hardening, user training and handover documentation, as standard." },
+      ],
+    },
+    // PLACEHOLDER: the example answers illustrate the idea; confirm IDN AI's real capabilities before launch.
+    teaser: {
+      tag: "Coming soon",
+      title: "IDN AI",
+      body: "An intelligent automation layer designed to transform how Nigerian businesses operate. Ask questions in plain language and get answers from your power, network and business data.",
+      abilities: ["Answers in plain language", "Spots problems early", "Writes your reports"],
+      cta: "Ask about early access",
+      examples: [
+        {
+          prompt: "Which Abuja sites lost power this week?",
+          answer:
+            "Three sites switched to battery backup on Tuesday and all recovered within 40 minutes. Site 12's batteries are ageing, so I'd schedule a check.",
+          source: "Power monitoring",
+        },
+        {
+          prompt: "Why is the Lagos office Wi-Fi slow?",
+          answer:
+            "Access point 4 on the second floor is overloaded at peak hours, with 63 devices connected. Adding one access point would balance the load.",
+          source: "Network monitoring",
+        },
+        {
+          prompt: "Draft this month's operations report",
+          answer:
+            "Done. Uptime was 99.8%, 14 tickets were resolved and diesel spend fell 22%. I've added charts and sent it to you for review.",
+          source: "Business reports",
+        },
+      ],
+    },
+    // PLACEHOLDER figures: confirm terms with IDN.
+    assurances: {
+      pill: "Our commitments",
+      heading: ["Your software,", "your code."],
+      intro: "Clear ownership, steady communication and support that continues after launch.",
+      items: [
+        { value: "100%", title: "Code ownership", body: "You own the code and the data. Everything is handed over with documentation." },
+        { value: "Weekly", title: "Demos", body: "See working software every week, not just at the end." },
+        { value: "30", unit: "days", title: "Post-launch fixes", body: "We fix any bugs found in the first month after launch, at no cost." },
+        { value: "99.9%", unit: "uptime", title: "Hosting target", body: "Our uptime target for software we host and maintain." },
+      ],
+      brands: ["Tool one", "Tool two", "Tool three", "Tool four", "Tool five"],
+    },
+    // PLACEHOLDER answers: confirm with IDN.
+    faqs: [
+      {
+        q: "How much does custom software cost?",
+        a: "It depends on scope. After a short discovery call we send a clear quote, either a fixed price for a defined project or a monthly rate for a dedicated team.",
+      },
+      {
+        q: "How long does it take to build?",
+        a: "Simple web apps often take six to ten weeks. Larger platforms are released in stages so you get value early. Try the project scoper above for a rough guide.",
+      },
+      {
+        q: "Who owns the code?",
+        a: "You do. When the project is paid for, the code, designs and data are yours, with documentation so any team can maintain them.",
+      },
+      {
+        q: "Can you work with our existing systems?",
+        a: "Yes. We connect new software to the tools you already use, such as accounting, ERP, payment gateways and messaging, rather than replacing them.",
+      },
+      {
+        q: "How do you keep our data secure?",
+        a: "We build with role-based access, encryption and audit logs, and handle personal data in line with the Nigeria Data Protection Act.",
+      },
+      {
+        q: "What happens after launch?",
+        a: "We fix bugs for the first 30 days, then you can choose a support plan for monitoring, updates and new features.",
       },
     ],
   },

@@ -7,6 +7,8 @@ import { SolutionStory } from "@/components/solution/story";
 import { SolutionOfferings } from "@/components/solution/offerings";
 import { SolutionCapabilities } from "@/components/solution/capabilities";
 import { SolutionHealthCheck } from "@/components/solution/health-check";
+import { SolutionScoper } from "@/components/solution/scoper";
+import { SolutionTeaser } from "@/components/solution/teaser";
 import { SolutionPackages } from "@/components/solution/packages";
 import { SolutionEstimator } from "@/components/solution/estimator";
 import { SolutionProcess } from "@/components/solution/process";
@@ -46,9 +48,13 @@ export default async function SolutionRoute({ params }: Props) {
         <SolutionOfferings page={page} />
         {page.capabilities && <SolutionCapabilities capabilities={page.capabilities} />}
         {page.healthCheck && <SolutionHealthCheck check={page.healthCheck} />}
+        {page.scoper && <SolutionScoper scoper={page.scoper} />}
         {page.packages && <SolutionPackages packages={page.packages} shop={page.id === "power"} />}
         {page.estimator && <SolutionEstimator estimator={page.estimator} packages={page.packages?.items} />}
-        {page.process && <SolutionProcess heading={page.process.heading} steps={page.process.steps} />}
+        {page.process && (
+          <SolutionProcess heading={page.process.heading} steps={page.process.steps} layout={page.process.layout} />
+        )}
+        {page.teaser && <SolutionTeaser teaser={page.teaser} />}
         {page.project && <SolutionProject project={page.project} />}
         {page.assurances && <SolutionAssurances assurances={page.assurances} />}
         {page.faqs && <SolutionFaq title={page.title} items={page.faqs} />}

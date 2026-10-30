@@ -1,4 +1,4 @@
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 
 export function SolutionFaq({ title, items }: { title: string; items: readonly { q: string; a: string }[] }) {
   return (
-    <section aria-labelledby="solution-faq-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="solution-faq-title" className={sectionSpace}>
       <div className={cn(wrap, "grid gap-10 lg:grid-cols-12")}>
         <Reveal className="lg:col-span-5">
           <Pill>FAQ</Pill>

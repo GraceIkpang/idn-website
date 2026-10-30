@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
 import type { FeaturedProject } from "@/lib/solution-pages";
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
@@ -11,7 +11,7 @@ export function SolutionProject({ project }: { project: FeaturedProject }) {
   const [main, second] = project.images;
   const t = project.testimonial;
   return (
-    <section aria-labelledby="project-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="project-title" className={sectionSpace}>
       <div className={cn(wrap, "grid gap-10 lg:grid-cols-12 lg:gap-8")}>
         <Reveal className="grid grid-cols-5 gap-2 lg:col-span-7">
           <div className={cn("relative col-span-5 aspect-[4/3] overflow-hidden rounded-[24px] bg-layer-1 sm:aspect-auto sm:min-h-[520px]", second && "sm:col-span-3")}>

@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import type { Estimator, Package } from "@/lib/solution-pages";
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
@@ -36,7 +36,7 @@ export function SolutionEstimator({ estimator, packages }: { estimator: Estimato
   const fill = ((spend - min) / (max - min)) * 100;
 
   return (
-    <section aria-labelledby="estimator-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="estimator-title" className={sectionSpace}>
       <div className={wrap}>
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">

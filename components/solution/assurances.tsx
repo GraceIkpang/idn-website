@@ -1,5 +1,5 @@
 import type { SolutionPage } from "@/lib/solution-pages";
-import { sectionHeading, wrap } from "@/lib/layout";
+import { sectionHeading, sectionSpace, wrap } from "@/lib/layout";
 import { DrawLine } from "@/components/ui/draw-line";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 export function SolutionAssurances({ assurances }: { assurances: NonNullable<SolutionPage["assurances"]> }) {
   const { pill, heading, intro } = assurances;
   return (
-    <section aria-labelledby="assurances-title" className="px-2 pb-24 sm:px-3 sm:pb-32">
+    <section aria-labelledby="assurances-title" className={cn("px-2 sm:px-3", sectionSpace)}>
       <div className="rounded-[24px] bg-ink py-20 text-white sm:rounded-[32px] sm:py-28">
         <div className={wrap}>
           <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
